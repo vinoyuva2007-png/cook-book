@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodieHub - Discover Amazing Recipes</title>
+    <link rel="stylesheet" href="recipe_styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <i class="fas fa-utensils"></i>
+                    <span>FoodieHub</span>
+                </div>
+                
+                <div class="nav-search">
+                    <div class="search-container">
+                        <input type="text" id="searchInput" placeholder="Find a recipe or ingredient" />
+                        <button class="search-btn" onclick="searchRecipes()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="nav-actions">
+                    <button class="nav-btn" onclick="toggleSavedRecipes()">
+                        <i class="fas fa-heart"></i>
+                        <span>My Recipes</span>
+                    </button>
+                    <button class="nav-btn">
+                        <i class="fas fa-user"></i>
+                        <span>Log In</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="nav-links">
+            <a href="#" class="nav-link active" data-category="all">ALL RECIPES</a>
+            <a href="#" class="nav-link" data-category="breakfast">BREAKFAST</a>
+            <a href="#" class="nav-link" data-category="lunch">LUNCH</a>
+            <a href="#" class="nav-link" data-category="dinner">DINNER</a>
+            <a href="#" class="nav-link" data-category="dessert">DESSERTS</a>
+            <a href="#" class="nav-link" data-category="quick">QUICK MEALS</a>
+            <a href="#" class="nav-link" data-category="healthy">HEALTHY</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-stats">
+                <div class="stat">
+                    <i class="fas fa-book"></i>
+                    <span class="stat-number">5.2K</span>
+                    <span class="stat-label">Original Recipes</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-star"></i>
+                    <span class="stat-number">8.9M</span>
+                    <span class="stat-label">Ratings & Reviews</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-users"></i>
+                    <span class="stat-number">2.1M</span>
+                    <span class="stat-label">Home Cooks</span>
+                </div>
+            </div>
+            <h1>America's #1 Trusted Recipe Resource since 2020</h1>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop&crop=center" alt="Featured Recipe" />
+            <div class="hero-recipe-info">
+                <h3>Mediterranean Pasta Salad</h3>
+                <div class="recipe-meta">
+                    <span><i class="fas fa-clock"></i> 25 mins</span>
+                    <span><i class="fas fa-star"></i> 4.8 (324)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- My Recipes Section (Initially Hidden) -->
+    <section id="myRecipesSection" class="my-recipes-section" style="display: none;">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fas fa-heart"></i> My Saved Recipes</h2>
+                <p>Keep your FoodieHub favorites here for free.</p>
+            </div>
+            <div id="savedRecipesGrid" class="recipes-grid">
+                <!-- Saved recipes will be populated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Recipes Section -->
+    <section class="featured-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Latest</h2>
+            </div>
+            <div class="latest-grid">
+                <div class="latest-item">
+                    <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=300&h=200&fit=crop" alt="Hot Dogs" />
+                    <div class="latest-content">
+                        <span class="category">HOT DOGS AND CORN DOGS RECIPES</span>
+                        <span class="time">3 HOURS AGO</span>
+                        <h3>Gourmet Hot Dogs with Caramelized Onions</h3>
+                    </div>
+                </div>
+                <div class="latest-item">
+                    <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=300&h=200&fit=crop" alt="Breakfast" />
+                    <div class="latest-content">
+                        <span class="category">BREAKFAST</span>
+                        <span class="time">5 HOURS AGO</span>
+                        <h3>Perfect Pancakes Made Easy</h3>
+                    </div>
+                </div>
+                <div class="latest-item">
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300&h=200&fit=crop" alt="Pizza" />
+                    <div class="latest-content">
+                        <span class="category">CELEBRITY & ENTERTAINMENT</span>
+                        <span class="time">6 HOURS AGO</span>
+                        <h3>Classic Margherita Pizza Recipe</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recipe Suggestions Section -->
+    <section class="suggestions-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Start Saving These Dishes</h2>
+                <p>Keep your FoodieHub favorites here for free.</p>
+                <div class="carousel-controls">
+                    <button class="carousel-btn prev" onclick="previousSuggestions()">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-btn next" onclick="nextSuggestions()">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="suggestions-carousel" id="suggestionsCarousel">
+                <!-- Recipe suggestions will be populated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Trending Section -->
+    <section class="trending-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Trending Now</h2>
+            </div>
+            <div class="trending-grid">
+                <div class="trending-item large">
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=500&h=300&fit=crop" alt="Fall Recipes" />
+                    <div class="trending-content">
+                        <span class="category">FALL</span>
+                        <h3>The 18 Recipes We Can't Wait To Make This September</h3>
+                    </div>
+                </div>
+                <div class="trending-item">
+                    <img src="https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=400&h=250&fit=crop" alt="Breakfast" />
+                    <div class="trending-content">
+                        <span class="category">BREAKFAST AND BRUNCH</span>
+                        <h3>15 Healthy Breakfasts Ready in 15 Minutes or Less</h3>
+                    </div>
+                </div>
+                <div class="trending-item">
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=250&fit=crop" alt="Pizza" />
+                    <div class="trending-content">
+                        <span class="category">IN THE KITCHEN</span>
+                        <h3>Grandma Pie is the Vintage Pizza Dish That Deserves a Spot in Your Recipe Box</h3>
+                    </div>
+                </div>
+                <div class="trending-item">
+                    <img src="https://images.unsplash.com/photo-1558818498-28c1e002b655?w=400&h=250&fit=crop" alt="Organization" />
+                    <div class="trending-content">
+                        <span class="category">CONTAINER & ORGANIZER REVIEWS</span>
+                        <h3>These 19 Brilliant Pantry Organization Tools Will Tame Your Kitchen Clutter</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to Busy Section -->
+    <section class="back-to-busy">
+        <div class="container">
+            <div class="section-header">
+                <h2>Back To Busy <i class="fas fa-arrow-right"></i></h2>
+            </div>
+            <div class="busy-grid" id="busyRecipesGrid">
+                <!-- Busy recipes will be populated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Recipe Modal -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalContent">
+                <!-- Modal content will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="recipe_script.js"></script>
+</body>
+</html>
